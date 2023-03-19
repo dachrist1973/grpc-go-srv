@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package =  "github.com/customers";
+
+
+
+service Customers {
+    rpc GetCustomer(CustomerRequest) returns (CustomerReply) {}
+    
+    // this returns a stream the client reads until there is 
+    // more customers. 
+    rpc GetCustomers(GetCustomersRequest)  returns (stream CustomerReply) {}
+
+    // Note there can also be stream from client side and 
+    // bi-directional streams 
+}
+
+
+message CustomerRequest {
+    string customerName = 1;
+    string customerID = 2;
+}
+
+message GetCustomersRequest{
+    int32 limit = 1;
+}
+
+message CustomerReply {
+    string customerName = 1; 
+    string customerID = 2; 
+    string customerType = 3;
+    string customerPostalCode = 4;
+    string customerCountryCode = 5;
+    string customerState = 6;
+    string customerCity = 7;
+    string customerPhone = 8;
+}
+
