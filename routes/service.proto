@@ -1,8 +1,11 @@
 syntax = "proto3";
 
-option go_package =  "github.com/customers";
+option go_package =  "./routes";
 
-
+//  This is the command I used to build the proto file. 
+// protoc --go_out=. --go_opt=paths=source_relative \
+// --go-grpc_out=. --go-grpc_opt=paths=source_relative \
+// *.proto
 
 service Customers {
     rpc GetCustomer(CustomerRequest) returns (CustomerReply) {}
@@ -25,7 +28,7 @@ message GetCustomersRequest{
     int32 limit = 1;
 }
 
-message CustomerReply {
+message Customer {
     string customerName = 1; 
     string customerID = 2; 
     string customerType = 3;
@@ -34,5 +37,9 @@ message CustomerReply {
     string customerState = 6;
     string customerCity = 7;
     string customerPhone = 8;
+
+}
+message CustomerReply {
+   Customer customer = 1;
 }
 
